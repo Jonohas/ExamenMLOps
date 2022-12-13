@@ -2,12 +2,19 @@ services:
   api:
     build:
       context: api
-      dockerfile: exam-1-dockerfile
+
+    ports:
+      - "3000:80"
+
+    expose:
+      - "80"
+
+    
 
   frontend:
     build: frontend
     ports:
       - "8080:80"
-
-
-
+    environment:
+      - API_HOST=api
+      - API_PORT=80
