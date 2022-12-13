@@ -1,0 +1,13 @@
+services:
+  api:
+    build:
+      context: api
+      dockerfile: exam-1-dockerfile
+
+  frontend:
+    build: frontend
+    ports:
+      - "8080:80"
+
+
+
