@@ -15,6 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the API image
-      run: docker build api --file Dockerfile --tag mlops-exam-1-backend:${{ github.sha }}
+      run: docker build api --tag mlops-exam-1-backend:${{ github.sha }}
     - name: Build the Frontend image
-      run: docker build frontend --file Dockerfile --tag mlops-exam-1-frontend:${{ github.sha }}
+      run: docker build frontend --tag mlops-exam-1-frontend:${{ github.sha }}
