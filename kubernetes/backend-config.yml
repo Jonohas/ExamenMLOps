@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: 2016-02-18T19:14:38Z
+  name: backend-config
+  namespace: mlops-exam
+data:
+  NAME: JONASFABER
+  DATE: 13/12/2022

@@ -1,0 +1,30 @@
+# kubernetes yaml file to quickly deploy a container
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mlops-exam
+  name: mlops-exam-frontend
+  labels:
+    app: mlops-exam-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlops-exam-frontend
+
+  template:
+    metadata:
+      labels:
+        app: mlops-exam-frontend
+    spec:
+      containers:
+      - name: mlops-exam-frontend
+        image: ghcr.io/jonohas/mlops-exam-1-frontend:main
+        ports:
+        - containerPort: 80
+        
+          name: http
+
+        envFrom:
+        - configMapRef:
+            name: fronend-config

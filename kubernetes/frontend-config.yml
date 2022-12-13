@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: 2016-02-18T19:14:38Z
+  name: fronend-config
+  namespace: mlops-exam
+data:
+  API_PORT: "80"
+  API_HOST: "10.1.0.242"
