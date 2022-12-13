@@ -1,5 +1,7 @@
 services:
   api:
+    container_name: mlops-exam-1-backend
+    image: jonohas/mlops-exam-1-backend
     build:
       context: api
 
@@ -12,6 +14,8 @@ services:
     
 
   frontend:
+    container_name: mlops-exam-1-frontend
+    image: jonohas/mlops-exam-1-frontend
     build: frontend
     ports:
       - "8080:80"
