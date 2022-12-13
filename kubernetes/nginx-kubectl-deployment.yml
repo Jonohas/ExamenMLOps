@@ -1,0 +1,25 @@
+# kubernetes yaml file to quickly deploy a container
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mlops-exam-jonas-faber
+  name: nginx-jonas-faber
+  labels:
+    app: nginx-jonas-faber
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-jonas-faber
+
+  template:
+    metadata:
+      labels:
+        app: nginx-jonas-faber
+        exam: version1
+    spec:
+      containers:
+      - name: nginx-jonas-faber
+        image: nathansegers/vue-docker:2.0.0
+        ports:
+        - containerPort: 80
