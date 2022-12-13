@@ -32,8 +32,6 @@ jobs:
         # list of Docker images to use as base name for tags
         images: |
           ghcr.io/jonohas/mlops-exam-1-backend
-          ghcr.io/jonohas/mlops-exam-1-backend:latest
-          ghcr.io/jonohas/mlops-exam-1-backend:${{ github.sha }}
         # generate Docker tags based on the following events/attributes:
         # The GitHub Branch
         # The GitHub SHA
@@ -49,8 +47,6 @@ jobs:
         # list of Docker images to use as base name for tags
         images: |
           ghcr.io/jonohas/mlops-exam-1-frontend
-          ghcr.io/jonohas/mlops-exam-1-frontend:latest
-          ghcr.io/jonohas/mlops-exam-1-frontend:${{ github.sha }}
         # generate Docker tags based on the following events/attributes:
         # The GitHub Branch
         # The GitHub SHA
