@@ -28,7 +28,7 @@ def read_in_all_courses(limit: int = -1) -> List[Course]:
     Append them to the all_courses list and return that list."""
 
     all_courses = []
-    for course in glob(f'data/*.{os.environ.get("file_format", "md")}')[:limit]:
+    for course in glob(f'data/*.{os.environ.get("file_format", "json")}')[:limit]:
         try:
             with open(course, 'r') as f:
                 courseParsed = json.load(f)
