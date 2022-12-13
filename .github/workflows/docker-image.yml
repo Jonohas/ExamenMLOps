@@ -11,10 +11,64 @@ jobs:
   build:
 
     runs-on: ubuntu-22.04
+    
+    # Enter your GITHUB Token here!
 
+        
     steps:
     - uses: actions/checkout@v3
-    - name: Build the API image
-      run: docker build api --tag mlops-exam-1-backend:${{ github.sha }}
-    - name: Build the Frontend image
-      run: docker build frontend --tag mlops-exam-1-frontend:${{ github.sha }}
+    
+    - name: Login to GHCR
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GHCR_TOKEN }}
+        
+    - name: Gather Docker Meta Information
+      id: meta-backend
+      uses: docker/metadata-action@v3
+      with:
+        # list of Docker images to use as base name for tags
+        images: |
+          ghcr.io/jonohas/mlops-exam-1-backend
+          ghcr.io/jonohas/mlops-exam-1-backend:latest
+          ghcr.io/jonohas/mlops-exam-1-backend:${{ github.sha }}
+        # generate Docker tags based on the following events/attributes:
+        # The GitHub Branch
+        # The GitHub SHA
+        # More info: https://github.com/docker/build-push-action/blob/master/docs/advanced/tags-labels.md
+        tags: |
+          type=ref,event=branch
+          type=sha
+          
+    - name: Gather Docker Meta Information
+      id: meta-frontend
+      uses: docker/metadata-action@v3
+      with:
+        # list of Docker images to use as base name for tags
+        images: |
+          ghcr.io/jonohas/mlops-exam-1-frontend
+          ghcr.io/jonohas/mlops-exam-1-frontend:latest
+          ghcr.io/jonohas/mlops-exam-1-frontend:${{ github.sha }}
+        # generate Docker tags based on the following events/attributes:
+        # The GitHub Branch
+        # The GitHub SHA
+        # More info: https://github.com/docker/build-push-action/blob/master/docs/advanced/tags-labels.md
+        tags: |
+          type=ref,event=branch
+          type=sha
+      
+    - name: Build and push API image
+      uses: docker/build-push-action@v3.2.0
+      with:
+        context: api
+        push: true
+        tags: ${{ steps.meta-backend.outputs.tags }}
+        
+    - name: Build and push Frontend image
+      uses: docker/build-push-action@v3.2.0
+      with:
+        context: frontend
+        push: true
+        tags: ${{ steps.meta-frontend.outputs.tags }}
