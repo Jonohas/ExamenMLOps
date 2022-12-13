@@ -1,0 +1,15 @@
+  apiVersion: v1
+  kind: Service
+  metadata:  
+    namespace: mlops-exam-jonas-faber
+    name: nginx-nodeport-service
+  spec:
+    selector:    
+      app: nginx-jonas-faber
+    type: NodePort
+    ports:  
+    - name: http
+      port: 80
+      targetPort: 80
+      nodePort: 30002
+      protocol: TCP
